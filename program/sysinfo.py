@@ -35,7 +35,7 @@ async def give_sysinfo(client, message):
     psutil.disk_io_counters()
     disk = f"{humanbytes(du.used)} / {humanbytes(du.total)} " f"({du.percent}%)"
     cpu_len = len(psutil.Process().cpu_affinity())
-    somsg = f"""🖥 **System Information**
+    somsg = f"""🖥 **Sistem Məlumatı**
     
 **PlatForm :** `{splatform}`
 **PlatForm - Release :** `{platform_release}`
