@@ -16,36 +16,36 @@ from config import (
 @Client.on_callback_query(filters.regex("cbstart"))
 async def cbstart(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""✨ **Welcome [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**\n
-💭 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) allows you to play music and video on groups through the new Telegram's video chats!**
+        f"""✨ **xoş gəlmisiniz [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**\n
+💭 **[{BOT_NAME}](https://t.me/{BOT_USERNAME}) Telegramda səsli söhbətdə musiqi ifa etmək və video yayımı üçün kodlaşdırılmışam!**
 
-💡 **Find out all the Bot's commands and how they work by clicking on the » 📚 Commands button!**
+💡 **» Mənim həddindən çox əmrim var. Əmrlərə baxmaq üçün Əmrlər 📚 düyməsinə vur!**
 
-🔖 **To know how to use this bot, please click on the » ❓ Basic Guide button!**""",
+🔖 **Əgər botu qrupuna qoşmaq istəyirsənsə ❔ Quraşdırılma baxa bilərsən.**""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "➕ Add me to your Group ➕",
+                        "➕ Gurupa əlavə et ➕",
                         url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                     )
                 ],
-                [InlineKeyboardButton("❓ Basic Guide", callback_data="cbhowtouse")],
+                [InlineKeyboardButton("❔Quraşdırma❔", callback_data="cbhowtouse")],
                 [
-                    InlineKeyboardButton("📚 Commands", callback_data="cbcmds"),
-                    InlineKeyboardButton("❤ Donate", url=f"https://t.me/{OWNER_NAME}"),
+                    InlineKeyboardButton("📚 Əmirlər", callback_data="cbcmds"),
+                    InlineKeyboardButton("👨🏻‍💻 Sahibim", url=f"https://t.me/{OWNER_NAME}"),
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 Official Group", url=f"https://t.me/{GROUP_SUPPORT}"
+                        "👥 Rəsmi Group", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "📣 Official Channel", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        "📣 Rəsmi Kanal", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "🌐 Source Code", url="https://github.com/levina-lab/video-stream"
+                        "🌐 Nexus MMC", url="https://t.me/NEXUS_MMC"
                     )
                 ],
             ]
@@ -57,22 +57,20 @@ async def cbstart(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbhowtouse"))
 async def cbguides(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""❓ **Basic Guide for using this bot:**
+        f"""⚙️ QURULUM QAYDASI:**
 
-1.) **First, add me to your group.**
-2.) **Then, promote me as administrator and give all permissions except Anonymous Admin.**
-3.) **After promoting me, type /reload in group to refresh the admin data.**
-3.) **Add @{ASSISTANT_NAME} to your group or type /userbotjoin to invite her.**
-4.) **Turn on the video chat first before start to play video/music.**
-5.) **Sometimes, reloading the bot by using /reload command can help you to fix some problem.**
+1.) **First, qrupunuza əlavə edin.**
+2.) **Sonra məni admin et və anonim admindən başqa bütün icazələri ver.**
+3.) **Daha sonra admin siyahısını yeniləmək üçün qrupa /yenile yazın..**
+4.) **@{ASSISTANT_NAME} qrupunuza əlavə edin və ya/userbotjoin yazın özü gəlsin.**
+5.) **Musiqi oxutmağa başlamazdan əvvəl səsli söhbəti yandırın..**
 
-📌 **If the userbot not joined to video chat, make sure if the video chat already turned on, or type /userbotleave then type /userbotjoin again.**
+📌 **Assistant səsli söhbətə qoşulmayıbsa, səsli söhbətin aktiv olub olmadığına əmin olun və ya /leave yazın, sonra yenidən /add yazın..**
 
-💡 **If you have a follow-up questions about this bot, you can tell it on my support chat here: @{GROUP_SUPPORT}**
 
-⚡ __Powered by {BOT_NAME} A.I__""",
+⚡ 𝙽𝚎𝚡𝚞𝚜 𝙱𝚘𝚝 {BOT_NAME} """,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbstart")]]
+            [[InlineKeyboardButton("🔙 Geri qayıt", callback_data="cbstart")]]
         ),
     )
 
@@ -80,20 +78,20 @@ async def cbguides(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbcmds"))
 async def cbcmds(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""✨ **Hello [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**
+        f"""✨ **Salam [{query.message.chat.first_name}](tg://user?id={query.message.chat.id}) !**
 
-» **press the button below to read the explanation and see the list of available commands !**
+» **» Mənim əmrlərimin siyahısına baxmaq və izahlarını oxumaq üçün aşağıdakı butona basın !**
 
-⚡ __Powered by {BOT_NAME} A.I__""",
+⚡ 𝙽𝚎𝚡𝚞𝚜 𝙱𝚘𝚝 {BOT_NAME} """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("👷🏻 Admin Cmd", callback_data="cbadmin"),
-                    InlineKeyboardButton("🧙🏻 Sudo Cmd", callback_data="cbsudo"),
+                    InlineKeyboardButton("👷🏻 Admin əmirləri", callback_data="cbadmin"),
+                    InlineKeyboardButton("🧙🏻 Sudo əmirləri", callback_data="cbsudo"),
                 ],[
-                    InlineKeyboardButton("📚 Basic Cmd", callback_data="cbbasic")
+                    InlineKeyboardButton("📚 BSadə əmirlər", callback_data="cbbasic")
                 ],[
-                    InlineKeyboardButton("🔙 Go Back", callback_data="cbstart")
+                    InlineKeyboardButton("🔙 Geri", callback_data="cbstart")
                 ],
             ]
         ),
@@ -103,24 +101,25 @@ async def cbcmds(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbbasic"))
 async def cbbasic(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""🏮 here is the basic commands:
+        f"""🏮 Sadə əmrlər bunlardır
 
-» /mplay (song name/link) - play music on video chat
-» /vplay (video name/link) - play video on video chat
-» /vstream - play live video from yt live/m3u8
-» /playlist - show you the playlist
-» /video (query) - download video from youtube
-» /song (query) - download song from youtube
-» /lyric (query) - scrap the song lyric
-» /search (query) - search a youtube video link
+» /play (musiqi adı) - Səsli söhbətdə musiqi oxudur
+» /stream (link) - Səslidə canlı açılır
+» /vplay (video adı) - Səslidə video açır
+» /vstream - Səslidə canlı radio açır
+» /playlist - Playlisti göstərir
+» /video (ad) - Videonu youtubedən yükləyir
+» /song (ad) - Musiqini youtubedən yükləyir
+» /lyric (musiqi adı) - Musiqi sözlərini tapır
+» /search (ad) - Axtaris edir
 
-» /ping - show the bot ping status
-» /uptime - show the bot uptime status
-» /alive - show the bot alive info (in group)
+» /ping - Ping statusu göstərir
+» /uptime - İşləmə vaxtını göstərir
+» /alive - Botun aktiv olduğunu yoxlayın
 
-⚡️ __Powered by {BOT_NAME} AI__""",
+⚡️ 𝙽𝚎𝚡𝚞𝚜 𝙱𝚘𝚝 {BOT_NAME} """,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbcmds")]]
+            [[InlineKeyboardButton("🔙 Geri", callback_data="cbcmds")]]
         ),
     )
 
@@ -128,40 +127,39 @@ async def cbbasic(_, query: CallbackQuery):
 @Client.on_callback_query(filters.regex("cbadmin"))
 async def cbadmin(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""🏮 here is the admin commands:
+        f"""🏮 Admin əmrləri
 
-» /pause - pause the stream
-» /resume - resume the stream
-» /skip - switch to next stream
-» /stop - stop the streaming
-» /vmute - mute the userbot on voice chat
-» /vunmute - unmute the userbot on voice chat
-» /volume `1-200` - adjust the volume of music (userbot must be admin)
-» /reload - reload bot and refresh the admin data
-» /userbotjoin - invite the userbot to join group
-» /userbotleave - order userbot to leave from group
+» /saxla - Pause verir
+» /dayandır - Davam edir
+» /kec - Növbəti musiqiyə keçir
+» /durdur - Musiqini bitirir
+» /sessiz - Asistanı səssizə alır
+» /sesiac - Asistanın səsini açır
+» /volume 1-200 - Səs səviyyəsi qeyd edin
+» /yenile - Admin listi yeniləyin
+» /userbotjoin - Asistanı qrupa dəvət edin
+» /userbotleave - Asistanı qrupdan çıxarın
 
-⚡️ __Powered by {BOT_NAME} AI__""",
+⚡️ 𝙽𝚎𝚡𝚞𝚜 𝙱𝚘𝚝 {BOT_NAME} """,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbcmds")]]
+            [[InlineKeyboardButton("🔙 Geri", callback_data="cbcmds")]]
         ),
     )
 
 @Client.on_callback_query(filters.regex("cbsudo"))
 async def cbsudo(_, query: CallbackQuery):
     await query.edit_message_text(
-        f"""🏮 here is the sudo commands:
+        f"""🏮 Sudo əmrləri
 
-» /rmw - clean all raw files
-» /rmd - clean all downloaded files
-» /sysinfo - show the system information
-» /update - update your bot to latest version
-» /restart - restart your bot
-» /leaveall - order userbot to leave from all group
+» /rmw - Raw faylları silin
+» /rmd - Datanı təmizləyin
+» /sysinfo - Sistemə baxın
+» /restart - Botu yenidən başladın
+» /leaveall - Asistantı bütün qruplardan çıxarın
 
-⚡ __Powered by {BOT_NAME} AI__""",
+⚡ 𝙽𝚎𝚡𝚞𝚜 𝙱𝚘𝚝 {BOT_NAME} """,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("🔙 Go Back", callback_data="cbcmds")]]
+            [[InlineKeyboardButton("🔙 Geri", callback_data="cbcmds")]]
         ),
     )
 
