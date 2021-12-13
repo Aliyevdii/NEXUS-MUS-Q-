@@ -24,7 +24,7 @@ bcl = InlineKeyboardMarkup(
 )
 
 
-@Client.on_message(command(["yenile", f"yenile@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["restart", f"restart@{BOT_USERNAME}"]) & other_filters)
 @authorized_users_only
 async def update_admin(client, message):
     global admins
@@ -38,7 +38,7 @@ async def update_admin(client, message):
     )
 
 
-@Client.on_message(command(["kec", f"kec@{BOT_USERNAME}", "vskip"]) & other_filters)
+@Client.on_message(command(["skip", f"kec@{BOT_USERNAME}", "vskip"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
 
@@ -89,7 +89,7 @@ async def skip(client, m: Message):
 
 
 @Client.on_message(
-    command(["durdur", f"durdur@{BOT_USERNAME}", "durdur", f"durdur@{BOT_USERNAME}", "vstop"])
+    command(["durdur", f"stop@{BOT_USERNAME}", "stop", f"durdur@{BOT_USERNAME}", "vstop"])
     & other_filters
 )
 @authorized_users_only
@@ -107,7 +107,7 @@ async def stop(client, m: Message):
 
 
 @Client.on_message(
-    command(["saxla", f"saxla@{BOT_USERNAME}", "vpause"]) & other_filters
+    command(["saxla", f"pause@{BOT_USERNAME}", "vpause"]) & other_filters
 )
 @authorized_users_only
 async def pause(client, m: Message):
@@ -124,7 +124,7 @@ async def pause(client, m: Message):
 
 
 @Client.on_message(
-    command(["dayandır", f"dayandır@{BOT_USERNAME}", "vresume"]) & other_filters
+    command(["dayandır", f"resume@{BOT_USERNAME}", "vresume"]) & other_filters
 )
 @authorized_users_only
 async def resume(client, m: Message):
@@ -142,7 +142,7 @@ async def resume(client, m: Message):
 
 
 @Client.on_message(
-    command(["sessiz", f"sessiz@{BOT_USERNAME}", "vmute"]) & other_filters
+    command(["sessiz", f"mute@{BOT_USERNAME}", "vmute"]) & other_filters
 )
 @authorized_users_only
 async def mute(client, m: Message):
@@ -160,7 +160,7 @@ async def mute(client, m: Message):
 
 
 @Client.on_message(
-    command(["sesiac", f"sesiac@{BOT_USERNAME}", "vunmute"]) & other_filters
+    command(["sesiac", f"unmute@{BOT_USERNAME}", "vunmute"]) & other_filters
 )
 @authorized_users_only
 async def unmute(client, m: Message):
