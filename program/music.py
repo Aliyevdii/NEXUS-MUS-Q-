@@ -39,7 +39,7 @@ async def ytdl(format: str, link: str):
     return 0, stderr
 
 
-@Client.on_message(command(["mplay", f"mplay@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["play", f"play@{BOT_USERNAME}"]) & other_filters)
 async def play(c: Client, m: Message):
     await m.delete()
     replied = m.reply_to_message
@@ -47,13 +47,13 @@ async def play(c: Client, m: Message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text="• Mᴇɴᴜ", callback_data="cbmenu"),
-                InlineKeyboardButton(text="• Cʟᴏsᴇ", callback_data="cls"),
+                InlineKeyboardButton(text="• Menu", callback_data="cbmenu"),
+                InlineKeyboardButton(text="• Cıxış", callback_data="cls"),
             ]
         ]
     )
     if m.sender_chat:
-        return await m.reply_text("you're an __Anonymous__ Admin !\n\n» revert back to user account from admin rights.")
+        return await m.reply_text("siz Anonim Adminsiniz !\n\n» admin hüquqlarından istifadəçi hesabına qayıdın.")
     try:
         aing = await c.get_me()
     except Exception as e:
@@ -61,28 +61,28 @@ async def play(c: Client, m: Message):
     a = await c.get_chat_member(chat_id, aing.id)
     if a.status != "administrator":
         await m.reply_text(
-            f"💡 To use me, I need to be an **Administrator** with the following **permissions**:\n\n» ❌ __Delete messages__\n» ❌ __Add users__\n» ❌ __Manage video chat__\n\nData is **updated** automatically after you **promote me**"
+            f"💡 Məndən istifadə etmək üçün aşağıdakı **icazələrə* malik **İdarəçi** olmalıyam*:\n\n» ❌ Mesajları silin\n» ❌ İstifadəçilər əlavə edin\n» ❌ Video söhbəti idarə edin\n\nData is **yeniləndi** sizdən sonra avtomatik olaraq **məni təşviq edin**"
         )
         return
     if not a.can_manage_voice_chats:
         await m.reply_text(
-            "missing required permission:" + "\n\n» ❌ __Manage video chat__"
+            "tələb olunan icazənin olmaması:" + "\n\n» ❌ Video söhbəti idarə edin"
         )
         return
     if not a.can_delete_messages:
         await m.reply_text(
-            "missing required permission:" + "\n\n» ❌ __Delete messages__"
+            "tələb olunan icazənin olmaması:" + "\n\n» ❌ Mesajları silin"
         )
         return
     if not a.can_invite_users:
-        await m.reply_text("missing required permission:" + "\n\n» ❌ __Add users__")
+        await m.reply_text("tələb olunan icazənin olmaması:" + "\n\n» ❌ İstifadəçilər əlavə edin")
         return
     try:
         ubot = (await user.get_me()).id
         b = await c.get_chat_member(chat_id, ubot)
         if b.status == "kicked":
             await m.reply_text(
-                f"@{ASSISTANT_NAME} **is banned in group** {m.chat.title}\n\n» **unban the userbot first if you want to use this bot.**"
+                f"@{ASSISTANT_NAME} **qrupda qadağandır** {m.chat.title}\n\n» **bu botdan istifadə etmək istəyirsinizsə, əvvəlcə userbotun qadağanını ləğv edin.**"
             )
             return
     except UserNotParticipant:
@@ -90,7 +90,7 @@ async def play(c: Client, m: Message):
             try:
                 await user.join_chat(m.chat.username)
             except Exception as e:
-                await m.reply_text(f"❌ **userbot failed to join**\n\n**reason**: `{e}`")
+                await m.reply_text(f"❌ **userbot qoşula bilmədi**\n\n**reason**: `{e}`")
                 return
         else:
             try:
@@ -106,11 +106,11 @@ async def play(c: Client, m: Message):
                 pass
             except Exception as e:
                 return await m.reply_text(
-                    f"❌ **userbot failed to join**\n\n**reason**: `{e}`"
+                    f"❌ **userbot qoşula bilmədi**\n\n**reason**: `{e}`"
                 )
     if replied:
         if replied.audio or replied.voice:
-            suhu = await replied.reply("📥 **downloading audio...**")
+            suhu = await replied.reply("📥 **audio endirilir...**")
             dl = await replied.download()
             link = replied.link
             if replied.audio:
@@ -133,7 +133,7 @@ async def play(c: Client, m: Message):
                 )
             else:
              try:
-                await suhu.edit("🔄 **Joining vc...**")
+                await suhu.edit("🔄 **Səsliyə qoşulur...**")
                 await call_py.join_group_call(
                     chat_id,
                     AudioPiped(
@@ -151,18 +151,18 @@ async def play(c: Client, m: Message):
                 )
              except Exception as e:
                 await suhu.delete()
-                await m.reply_text(f"🚫 error:\n\n» {e}")
+                await m.reply_text(f"🚫 xəta:\n\n» {e}")
         else:
             if len(m.command) < 2:
                 await m.reply(
-                    "» reply to an **audio file** or **give something to search.**"
+                    "» **audio faylına** cavab verin və ya **axtarmaq üçün nəsə verin.**"
                 )
             else:
-                suhu = await c.send_message(chat_id, "🔍 **Searching...**")
+                suhu = await c.send_message(chat_id, "🔍 **Axtarılır...**")
                 query = m.text.split(None, 1)[1]
                 search = ytsearch(query)
                 if search == 0:
-                    await suhu.edit("❌ **no results found.**")
+                    await suhu.edit("❌ **Heç bir nəticə tapılmadı.**")
                 else:
                     songname = search[0]
                     url = search[1]
@@ -171,7 +171,7 @@ async def play(c: Client, m: Message):
                     format = "bestaudio"
                     veez, ytlink = await ytdl(format, url)
                     if veez == 0:
-                        await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
+                        await suhu.edit(f"❌ youtube-dl problemləri aşkar edildi\n\n» `{ytlink}`")
                     else:
                         if chat_id in QUEUE:
                             pos = add_to_queue(
@@ -186,7 +186,7 @@ async def play(c: Client, m: Message):
                             )
                         else:
                             try:
-                                await suhu.edit("🔄 **Joining vc...**")
+                                await suhu.edit("🔄 **Səsliyə qoşulur...**")
                                 await call_py.join_group_call(
                                     chat_id,
                                     AudioPiped(
@@ -204,19 +204,19 @@ async def play(c: Client, m: Message):
                                 )
                             except Exception as ep:
                                 await suhu.delete()
-                                await m.reply_text(f"🚫 error: `{ep}`")
+                                await m.reply_text(f"🚫 xəta: `{ep}`")
 
     else:
         if len(m.command) < 2:
             await m.reply(
-                "» reply to an **audio file** or **give something to search.**"
+                "» **audio faylına** cavab verin və ya **axtarmaq üçün nəsə verin.**"
             )
         else:
-            suhu = await c.send_message(chat_id, "🔍 **Searching...**")
+            suhu = await c.send_message(chat_id, "🔍 **Axtarılır...***")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search == 0:
-                await suhu.edit("❌ **no results found.**")
+                await suhu.edit("❌ **Heç bir nəticə tapılmadı.**")
             else:
                 songname = search[0]
                 url = search[1]
@@ -225,7 +225,7 @@ async def play(c: Client, m: Message):
                 format = "bestaudio"
                 veez, ytlink = await ytdl(format, url)
                 if veez == 0:
-                    await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
+                    await suhu.edit(f"❌ youtube-dl problemləri aşkar edildi\n\n» `{ytlink}`")
                 else:
                     if chat_id in QUEUE:
                         pos = add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
@@ -240,7 +240,7 @@ async def play(c: Client, m: Message):
                         )
                     else:
                         try:
-                            await suhu.edit("🔄 **Joining vc...**")
+                            await suhu.edit("🔄 **Səsliyə qoşulur...**")
                             await call_py.join_group_call(
                                 chat_id,
                                 AudioPiped(
@@ -258,4 +258,4 @@ async def play(c: Client, m: Message):
                             )
                         except Exception as ep:
                             await suhu.delete()
-                            await m.reply_text(f"🚫 error: `{ep}`")
+                            await m.reply_text(f"🚫 xəta: `{ep}`")
