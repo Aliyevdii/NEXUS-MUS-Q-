@@ -15,7 +15,7 @@ from driver.filters import command, other_filters
 
 
 keyboard = InlineKeyboardMarkup(
-    [[InlineKeyboardButton("🗑 Close", callback_data="cls")]]
+    [[InlineKeyboardButton("🗑 Cıxış", callback_data="cls")]]
 )
 
 
@@ -36,4 +36,4 @@ async def playlist(client, m: Message):
             QUE = QUE + "\n" + f"**#{x}** - [{han}]({hok}) | `{hap}`"
          await m.reply(QUE, reply_markup=keyboard, disable_web_page_preview=True)
    else:
-      await m.reply("❌ **nothing is currently streaming.**")
+      await m.reply("❌ **hazırda heç nə yayımlanmır.**")
